@@ -3,10 +3,9 @@ import { Observable, of } from 'rxjs';
 import { CreateTaskDto } from './create-task.dto';
 import { TasksService } from './tasks.service';
 import { Task } from './task';
-import { HttpExceptionFilter } from 'src/http-exception.filter';
+import { HttpExceptionFilter } from '../http-exception.filter';
 
-// TODO: Use a proper UUID library instead; this isn't meant for public consumption
-import { randomStringGenerator as generateUuid } from '@nestjs/common/utils/random-string-generator.util'
+import { v4 as uuid } from 'uuid';
 
 @Controller('tasks')
 @UseFilters(HttpExceptionFilter)
@@ -27,12 +26,16 @@ export class TasksController {
   create(@Body() createTask: CreateTaskDto) {
     this.tasksService.create({
       ...createTask,
-      id: generateUuid()
+      id: this.generateUuid()
     } as Task);
   }
 
   @Put(':id')
   update(@Body() updateTask: CreateTaskDto) {
     throw new NotImplementedException();
+  }
+
+  private generateUuid(): string {
+    return uuid();
   }
 }
