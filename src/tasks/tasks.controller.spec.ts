@@ -12,7 +12,7 @@ describe('Tasks Controller', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [TasksController],
-      providers: [TasksService]
+      providers: [TasksService],
     }).compile();
 
     tasksController = module.get<TasksController>(TasksController);
@@ -31,12 +31,12 @@ describe('Tasks Controller', () => {
       tasksReturnedBySpy = [
         {
           id: 'abc',
-          title: 'test task'
-        }
+          title: 'test task',
+        },
       ];
       findAllSpy = jest.spyOn(tasksService, 'findAll')
         .mockReturnValue(tasksReturnedBySpy);
-    })
+    });
 
     it('should call tasksService.findAll', () => {
       // Act
@@ -64,13 +64,13 @@ describe('Tasks Controller', () => {
 
     beforeEach(() => {
       taskId = 'abe';
-      findOneByIdSpy = {
+      taskReturnedBySpy = {
         id: taskId,
-        title: 'test task'
+        title: 'test task',
       };
       findOneByIdSpy = jest.spyOn(tasksService, 'findOneById')
         .mockReturnValue(taskReturnedBySpy);
-    })
+    });
 
     it('should call tasksService.findOneById', () => {
       // Act
@@ -93,13 +93,12 @@ describe('Tasks Controller', () => {
 
   describe('create', () => {
     let createSpy;
-    let generateUuidSpy;
     let postedTask: CreateTaskDto;
     let taskId: string;
 
     beforeEach(() => {
       postedTask = {
-        title: 'test task'
+        title: 'test task',
       };
       taskId = 'abc';
       createSpy = jest.spyOn(tasksService, 'create');
@@ -109,8 +108,8 @@ describe('Tasks Controller', () => {
     it('should call taskService.create with postedTask', () => {
       const createdTask: Task = {
         id: taskId,
-        title: postedTask.title
-      }
+        title: postedTask.title,
+      };
 
       // Act
       tasksController.create(postedTask);

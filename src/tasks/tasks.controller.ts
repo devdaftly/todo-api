@@ -26,7 +26,7 @@ export class TasksController {
   create(@Body() createTask: CreateTaskDto) {
     this.tasksService.create({
       ...createTask,
-      id: this.generateUuid()
+      id: this.generateUuid(),
     } as Task);
   }
 

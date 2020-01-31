@@ -3,7 +3,7 @@ import { TasksModule } from './tasks/tasks.module';
 import { LoggerMiddleware } from './logger.middleware';
 
 @Module({
-  imports: [TasksModule]
+  imports: [TasksModule],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
